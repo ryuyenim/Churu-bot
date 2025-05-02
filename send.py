@@ -5,8 +5,8 @@ WEBHOOK_URL = "https://discordapp.com/api/webhooks/1367394347380768798/hzwiJLVkL
 
 # ⏰ 한국 시간 구하기
 kst = datetime.utcnow() + timedelta(hours=9)
-now = kst.strftime("%m/%d %H:%M")       # 표시용 시간 (00/00 00:00)
-time_only = kst.strftime("%H:%M")       # 비교용 시간 (00:00)
+now = kst.strftime("%m/%d %H:%M")     # 표시용
+time_only = kst.strftime("%H:%M")     # 비교용
 
 # 현재 시각별로 메시지 결정
 alert = ""
@@ -22,4 +22,4 @@ if alert:
     response = requests.post(WEBHOOK_URL, json={"content": alert})
     print(f"✅ 전송 완료! 상태 코드: {response.status_code}")
 else:
-    print(f"⏱️ {now} → 알림 시간 아님. 패스.")
+    print(f"[{now}] 알림 시간 아님. 패스.")
