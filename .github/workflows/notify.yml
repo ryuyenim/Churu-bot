@@ -1,0 +1,32 @@
+name: Churu Alert
+
+on:
+  schedule:
+    # 한국시간 기준 (UTC 기준 cron → -9시간 적용됨)
+    - cron: '55 17 * * *'  # 02:55 KST
+    - cron: '55 20 * * *'  # 05:55
+    - cron: '55 23 * * *'  # 08:55
+    - cron: '55 2  * * *'  # 11:55
+    - cron: '55 5  * * *'  # 14:55
+    - cron: '55 8  * * *'  # 17:55
+    - cron: '55 11 * * *'  # 20:55
+    - cron: '55 14 * * *'  # 23:55
+    - cron: '0 3  * * *'   # 12:00 KST
+    - cron: '0 9  * * *'   # 18:00
+    - cron: '0 11 * * *'   # 20:00
+    - cron: '0 13 * * *'   # 22:00
+  workflow_dispatch:  # 수동 실행도 가능하게
+
+jobs:
+  send-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run alert script
+        run: python send.py
